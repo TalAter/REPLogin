@@ -1,0 +1,44 @@
+body,html {
+  line-height: 1.6;
+  -ms-text-size-adjust: 100%;
+  -webkit-text-size-adjust: 100%;
+  background-color: #303340;
+  font-family: 'Fira Mono', monospace;
+  font-size: 16px;
+  color: #e1e5fa;
+  width: 100%;
+  height: 100%;
+  margin: 0;
+}
+
+.repl-output, .repl-input {
+  padding: 0 1%;
+  width: 98%;
+}
+@media (max-width: 600px) {
+  .repl-output, .repl-input {
+    padding: 0 3%;
+    width: 94%;
+  }
+}
+
+.repl-output {
+  position: absolute;
+  bottom: 28px;
+  color: #aab;
+}
+.repl-input {
+  position: absolute;
+  bottom: 2px;
+}
+.whoami {
+  margin-right: 10px;
+}
+input#repl-text-input {
+  background: none;
+  border: none;
+  outline: none;
+  color: #fff;
+  font-family: 'Fira Mono', monospace;
+  font-size: 16px;
+}
