@@ -1,28 +1,45 @@
+/*************************/
+/* REPL's Little Helpers */
+/*************************/
+
+// Places cursor on the text input.
 var focusOnInput = () => {
   document.getElementById('repl-text-input').focus();
 };
 
+/**************/
+/* REPL logic */
+/**************/
+
+// Reads a command that was just submitted and passes it to EVALUATE
 var REPL_READ = (event) => {
   event.preventDefault();
   var input = document.getElementById('repl-text-input').value;
   REPL_EVALUATE(input);
 };
 
+// Evaluate a command and passes it to PRINT
 var REPL_EVALUATE = (input) => {
   var output = '$ ' + input;
   REPL_PRINT(output);
 };
 
+// Prints output from a command, and calls LOOP
 var REPL_PRINT = (output) => {
   console.log(output);
   REPL_LOOP();
 };
 
+// Clears and focuses input again
 var REPL_LOOP = () => {
-  // wheeeee!
   document.getElementById('repl-text-input').value='';
   focusOnInput();
 };
+
+
+/********************/
+/* React components */
+/********************/
 
 var REPLoutput = React.createClass({
   getInitialState: function() {
@@ -70,6 +87,11 @@ var REPL = React.createClass({
     );
   }
 });
+
+
+/***************/
+/* VROOM VROOM */
+/***************/
 
 ReactDOM.render(
   <REPL />,
