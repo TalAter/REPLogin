@@ -10,7 +10,9 @@ body,html {
   height: 100%;
   margin: 0;
 }
-
+p {
+  margin: 0;
+}
 .repl-output, .repl-input {
   padding: 0 1%;
   width: 98%;

@@ -3,17 +3,22 @@ var focusOnInput = () => {
 };
 
 var REPLoutput = React.createClass({
-  render: () => {
+  getInitialState: function() {
+    return {
+      outputBuffer: [
+        {key: 0, text: 'Line 1'},
+        {key: 1, text: 'Line 2'}
+      ]
+    };
+  },
+  render: function() {
     return (
       <div className="repl-output">
-        NAME
-        ls - list directory contents
-        SYNOPSIS
-        ls [OPTION]... [FILE]...
-        DESCRIPTION
-        List  information  about the FILEs (the current directory by default).  Sort entries alpha-
-        betically if none of -cftuvSUX nor --sort is specified.
-        Mandatory arguments to long options are mandatory for short options too.
+        {this.state.outputBuffer.map(
+          function(line) {
+            return ( <p key={line.key}>{line.text}</p> );
+          }
+        )}
       </div>
     )
   }
