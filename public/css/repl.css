@@ -13,6 +13,9 @@ body,html {
 p {
   margin: 0;
 }
+form {
+  display: inline;
+}
 .repl-output, .repl-input {
   padding: 0 1%;
   width: 98%;
