@@ -2,6 +2,28 @@ var focusOnInput = () => {
   document.getElementById('repl-text-input').focus();
 };
 
+var REPL_READ = (event) => {
+  event.preventDefault();
+  var input = document.getElementById('repl-text-input').value;
+  REPL_EVALUATE(input);
+};
+
+var REPL_EVALUATE = (input) => {
+  var output = '$ ' + input;
+  REPL_PRINT(output);
+};
+
+var REPL_PRINT = (output) => {
+  console.log(output);
+  REPL_LOOP();
+};
+
+var REPL_LOOP = () => {
+  // wheeeee!
+  document.getElementById('repl-text-input').value='';
+  focusOnInput();
+};
+
 var REPLoutput = React.createClass({
   getInitialState: function() {
     return {
@@ -25,11 +47,13 @@ var REPLoutput = React.createClass({
 });
 
 var REPLinput = React.createClass({
-  render: () => {
+  render: function() {
     return (
       <div className="repl-input">
         <span className="whoami">[tal@ater ~] $</span>
-        <input onBlur={focusOnInput} id="repl-text-input"></input>
+        <form onSubmit={REPL_READ}>
+          <input onBlur={focusOnInput} id="repl-text-input"></input>
+        </form>
       </div>
     )
   }
