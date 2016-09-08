@@ -6,8 +6,9 @@ var REPLoutput = React.createClass({
   getInitialState: function() {
     return {
       outputBuffer: [
-        {key: 0, text: 'Line 1'},
-        {key: 1, text: 'Line 2'}
+        {key: 0, text: 'Welcome to REPLogin'},
+        {key: 1, text: 'Last login: Thu Sep 8 06:05:15 2016 from 46.120.5.205 (not really)'},
+        {key: 2, text: '-bash: warning: This is not bash'}
       ]
     };
   },
