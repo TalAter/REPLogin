@@ -113,7 +113,7 @@ var REPL = React.createClass({
   // Reads a command that was just submitted and passes it to EVALUATE
   READ: function(event) {
     event.preventDefault();
-    var input = document.getElementById('repl-text-input').value;
+    var input = document.getElementById('repl-text-input').value.toLowerCase();
     this.EVALUATE(input);
   },
 
