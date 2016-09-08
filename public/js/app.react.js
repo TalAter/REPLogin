@@ -12,13 +12,12 @@ var REPLoutput = React.createClass({
     };
   },
   render: function() {
+    var outputLines = this.state.outputBuffer.map(
+      (line) => ( <p key={line.key}>{line.text}</p> )
+    );
     return (
       <div className="repl-output">
-        {this.state.outputBuffer.map(
-          function(line) {
-            return ( <p key={line.key}>{line.text}</p> );
-          }
-        )}
+        {outputLines}
       </div>
     )
   }
