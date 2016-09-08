@@ -123,7 +123,11 @@ var REPL = React.createClass({
     if (this.state.sudo) {
       if (input === '12345') {
         let PERMISSION_GRANTED = true;
-        this.PRINT(REPLcommands[this.state.sudo.command].apply(this, this.state.sudo.args.concat(PERMISSION_GRANTED)));
+        if (REPLcommands[this.state.sudo.command]) {
+          this.PRINT(REPLcommands[this.state.sudo.command].apply(this, this.state.sudo.args.concat(PERMISSION_GRANTED)));
+        } else {
+          this.PRINT('command not found: '+this.state.sudo.command);          
+        }
       } else {
         this.PRINT('sudo: incorrect password');
       }
