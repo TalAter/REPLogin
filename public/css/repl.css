@@ -19,6 +19,7 @@ form {
 .repl-output, .repl-input {
   padding: 0 1%;
   width: 98%;
+  white-space: pre;
 }
 @media (max-width: 600px) {
   .repl-output, .repl-input {
@@ -46,4 +47,15 @@ input#repl-text-input {
   color: #fff;
   font-family: 'Fira Mono', monospace;
   font-size: 16px;
+}
+
+.repl-output em {
+  font-style: normal;
+  color: #9f9;
+}
+
+.repl-output strong {
+  font-style: normal;
+  font-weight: bold;
+  color: #e1e5fa;
 }
