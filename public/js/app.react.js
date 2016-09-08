@@ -38,8 +38,8 @@ var REPLcommands = {
     return (
       <div>
         <div>drwx------  7 tal  tal   4096 Sep 7  17:08 .</div>
-        <div>drwxr-xr-x. 3 root root  4096 Sep 8  12:29 ..</div>
-        <div>-rwxrwxr-x  1 root root   304 Sep 8  13:22 <em>passwords</em></div>
+        <div>drwxr-xr-x  3 root root  4096 Sep 8  12:29 ..</div>
+        <div>-rw-------  1 root root   304 Sep 8  13:22 <em>passwords</em></div>
       </div>
     )
   },
