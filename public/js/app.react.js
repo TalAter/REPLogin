@@ -71,7 +71,10 @@ var REPLcommands = {
     }
     if (permission) {
       return (
-        <div><img src="https://cdn.meme.am/instances/53376060.jpg" /></div>
+        <div>
+          <img src="https://cdn.meme.am/instances/53376060.jpg" />
+          <div><a href="/requirements.html">How did we do?</a></div>
+        </div>
       );
     } else {
       return (
@@ -88,6 +91,11 @@ var REPLcommands = {
     // save the command we are trying to sudo for later
     newState.sudo = {command: command, args: args};
     this.setState(newState);
+    return (
+      <div>
+        You need to be "logged in" as root.
+      </div>
+    );
   }
 };
 
