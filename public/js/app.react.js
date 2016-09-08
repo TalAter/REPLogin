@@ -123,11 +123,7 @@ var REPL = React.createClass({
     if (this.state.sudo) {
       if (input === '12345') {
         let PERMISSION_GRANTED = true;
-        if (REPLcommands[this.state.sudo.command]) {
-          this.PRINT(REPLcommands[this.state.sudo.command].apply(this, this.state.sudo.args.concat(PERMISSION_GRANTED)));
-        } else {
-          this.PRINT('command not found: '+this.state.sudo.command);          
-        }
+        this.runCommand(this.state.sudo.command, this.state.sudo.args.concat(PERMISSION_GRANTED));
       } else {
         this.PRINT('sudo: incorrect password');
       }
@@ -148,13 +144,7 @@ var REPL = React.createClass({
     // Destructuring and rest for the win!
     [command, ...args] = input.split(' ');
     // Check if command exists
-    if (REPLcommands[command]) {
-      this.PRINT(
-        REPLcommands[command].apply(this, args)
-      );
-    } else {
-      this.PRINT('command not found: '+command);
-    }
+    this.runCommand(command, args);
     this.LOOP();
   },
 
@@ -169,6 +159,17 @@ var REPL = React.createClass({
   LOOP: function() {
     document.getElementById('repl-text-input').value='';
     focusOnInput();
+  },
+
+  // Make sure a command exists, then run it with its arguments
+  runCommand: function(command, args) {
+    if (REPLcommands[command]) {
+      this.PRINT(
+        REPLcommands[command].apply(this, args)
+      );
+    } else {
+      this.PRINT('command not found: '+command);
+    }
   },
 
   componentDidMount: focusOnInput,
