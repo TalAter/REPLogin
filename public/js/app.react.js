@@ -21,6 +21,7 @@ var REPLcommands = {
         <p>Here are some commands you can try:</p>
         <p><em>ls</em>     List directory contents</p>
         <p><em>cd</em>     Change the current working directory.</p>
+        <p><em>pwd</em>    Print name of current/working directory.</p>
       </div>
     )
   },
@@ -38,6 +39,14 @@ var REPLcommands = {
         <div>drwxr-xr-x. 3 root root  4096 Sep 8   2016 ..</div>
         <div>-rwxrwxr-x  1 tal  tal    304 Sep 8   2016 <em>login</em></div>
       </div>
+    )
+  },
+  "ll": function() {
+    return REPLcommands["ls"]();
+  },
+  "pwd": function() {
+    return (
+      <div>/Users/tal</div>
     )
   },
   "login": function() {
