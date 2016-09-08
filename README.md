@@ -8,6 +8,7 @@
 ### Getting started with REPLogin
 
 - [ ] Clone the project: `$ git clone git@github.com:TalAter/REPLogin.git`
+- [ ] Change to REPLogin directory: `cd REPLogin`
 - [ ] Install dependencies: `$ npm install`
 - [ ] Run REPLogin's server: `$ npm start`
 - [ ] Point your browser to `http://localhost:8765/`
