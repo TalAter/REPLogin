@@ -1,7 +1,7 @@
 var REPLcommands = require('./repl.commands.react.js');
 var OutputBufferStore = require('./stores/OutputBufferStore.js');
 var AppStateStore = require('./stores/AppStateStore.js');
-require('./stores/CommandHistoryStore.js');
+var CommandHistoryStore = require('./stores/CommandHistoryStore.js');
 var REPLActions =  require('./actions/REPLActions.js');
 
 /*************************/
@@ -76,7 +76,7 @@ var REPL = React.createClass({
 
   // Clears and focuses input again
   LOOP: function() {
-    document.getElementById('repl-text-input').value='';
+    REPLActions.resetCommandHistoryOffset();
     focusOnInput();
   },
 
@@ -95,11 +95,37 @@ var REPL = React.createClass({
     focusOnInput();
     OutputBufferStore.addChangeListener(this._onChange);
     AppStateStore.addChangeListener(this._onChange);
+    AppStateStore.addChangeListener(this.renderHistoricCommand);
   },
 
   componentWillUnmount: function() {
     OutputBufferStore.removeChangeListener(this._onChange);
     AppStateStore.removeChangeListener(this._onChange);
+    AppStateStore.removeChangeListener(this.renderHistoricCommand);
+  },
+
+  handleKeyDown: function(e) {
+    // Up key pressed
+    if (e.keyCode === 38) {
+      REPLActions.goBackInCommandHistory();
+    }
+    // Down key pressed
+    if (e.keyCode === 40) {
+      REPLActions.goForwardInCommandHistory();
+    }
+  },
+
+  renderHistoricCommand: function() {
+    var command = CommandHistoryStore.getCommand(AppStateStore.getCommandHistoryOffset());
+    if (!command) {
+      this.setInputValue('');
+    } else {
+      this.setInputValue(command.command);
+    }
+  },
+
+  setInputValue: function(val) {
+    document.getElementById('repl-text-input').value=val;
   },
 
   render: function() {
@@ -114,7 +140,7 @@ var REPL = React.createClass({
         <div className="repl-input">
           <span className="whoami">{this.state.whoami}</span>
           <form onSubmit={this.READ}>
-            <input onBlur={focusOnInput} id="repl-text-input"></input>
+            <input onBlur={focusOnInput} onKeyDown={this.handleKeyDown} id="repl-text-input"></input>
           </form>
         </div>
       </div>

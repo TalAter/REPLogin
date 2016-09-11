@@ -13,6 +13,23 @@ var REPLActions = {
       input: input
     });
   },
+  goBackInCommandHistory: function() {
+    AppDispatcher.dispatch({
+      actionType: 'move-command-history-offset',
+      offsetChange: 1
+    });
+  },
+  goForwardInCommandHistory: function() {
+    AppDispatcher.dispatch({
+      actionType: 'move-command-history-offset',
+      offsetChange: -1
+    });
+  },
+  resetCommandHistoryOffset: function() {
+    AppDispatcher.dispatch({
+      actionType: 'reset-command-history-offset'
+    });
+  },
   setSudo: function(command, args) {
     AppDispatcher.dispatch({
       actionType: 'set-sudo',

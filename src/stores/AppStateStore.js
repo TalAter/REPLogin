@@ -1,13 +1,15 @@
 var AppDispatcher = require('../dispatcher/AppDispatcher');
 var EventEmitter = require('events').EventEmitter;
 var assign = require('object-assign');
+var CommandHistoryStore = require('./CommandHistoryStore');
 
 const CHANGE_EVENT = 'change';
 const DEFAULT_WHOAMI = '[tal@ater ~] $';
 
 var _appState = {
   sudo: undefined,
-  whoami: DEFAULT_WHOAMI
+  whoami: DEFAULT_WHOAMI,
+  commandHistoryOffset: -1
 };
 
 var AppStateStore = assign({}, EventEmitter.prototype, {
@@ -16,6 +18,9 @@ var AppStateStore = assign({}, EventEmitter.prototype, {
   },
   getSudo: function() {
     return _appState.sudo;
+  },
+  getCommandHistoryOffset: function() {
+    return _appState.commandHistoryOffset;
   },
   emitChange: function() {
     this.emit(CHANGE_EVENT);
@@ -38,6 +43,19 @@ AppDispatcher.register(function(action) {
     case 'clear-sudo':
       _appState.sudo = undefined;
       _appState.whoami = DEFAULT_WHOAMI;
+      AppStateStore.emitChange();
+      break;
+    case 'move-command-history-offset':
+      var offset = _appState.commandHistoryOffset + action.offsetChange;
+      var commandHistoryLength = CommandHistoryStore.getCommandHistoryLength();
+      if (offset >= commandHistoryLength || offset < -1) {
+        return;
+      }
+      _appState.commandHistoryOffset = offset;
+      AppStateStore.emitChange();
+      break;
+    case 'reset-command-history-offset':
+      _appState.commandHistoryOffset = -1;
       AppStateStore.emitChange();
       break;
   }
