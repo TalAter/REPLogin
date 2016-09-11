@@ -1,6 +1,8 @@
 module.exports = function(grunt) {
   "use strict";
 
+  require('load-grunt-tasks')(grunt);
+
   // Project configuration.
   grunt.initConfig({
     pkg: grunt.file.readJSON('package.json'),
@@ -32,11 +34,6 @@ module.exports = function(grunt) {
       }
     }
   });
-
-  // Load NPM Tasks
-  grunt.loadNpmTasks('grunt-jsxhint');
-  grunt.loadNpmTasks('grunt-contrib-watch');
-  grunt.loadNpmTasks('grunt-express-server');
 
   // Register task(s).
   grunt.registerTask('default', ['jshint']);
