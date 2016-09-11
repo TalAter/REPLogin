@@ -17,6 +17,7 @@
     "babelify": "^7.3.0",
     "browserify": "^13.1.0",
     "express": "^4.14.0",
+    "flux": "^2.1.1",
     "grunt": "^1.0.1",
     "grunt-babel": "^6.0.0",
     "grunt-browserify": "^5.0.0",

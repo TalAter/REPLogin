@@ -1,3 +1,5 @@
+var REPLActions =  require('./actions/REPLActions.js');
+
 var REPLcommands = {
   "help": function() {
     return (
@@ -72,11 +74,7 @@ var REPLcommands = {
     }
   },
   "sudo": function(command, ...args) {
-    let newState = this.state;
-    newState.whoami = '[sudo] password for tal:';
-    // save the command we are trying to sudo for later
-    newState.sudo = {command: command, args: args};
-    this.setState(newState);
+    REPLActions.setSudo(command, args);
     return (
       <div>
         You need to be "logged in" as root.

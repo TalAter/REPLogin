@@ -1,4 +1,7 @@
 var REPLcommands = require('./repl.commands.react.js');
+var OutputBufferStore = require('./stores/OutputBufferStore.js');
+var AppStateStore = require('./stores/AppStateStore.js');
+var REPLActions =  require('./actions/REPLActions.js');
 
 /*************************/
 /* REPL's Little Helpers */
@@ -9,6 +12,13 @@ var focusOnInput = () => {
   document.getElementById('repl-text-input').focus();
 };
 
+var getREPLstate = function() {
+  return {
+    outputBuffer: OutputBufferStore.getAll(),
+    whoami: AppStateStore.getWhoAmI(),
+    sudo: AppStateStore.getSudo()
+  }
+};
 
 /********************/
 /* React components */
@@ -17,15 +27,7 @@ var focusOnInput = () => {
 var REPL = React.createClass({
 
   getInitialState: function() {
-    return {
-      outputBuffer: [
-        {key: 0, text: 'Welcome to REPLogin'},
-        {key: 1, text: 'Last login: Thu Sep 8 06:05:15 2016 from 46.120.5.205 (not really)'},
-        {key: 2, text: '-bash: warning: This is not bash'},
-        {key: 3, text: 'For a list of available commands, try typing help'}
-      ],
-      whoami: '[tal@ater ~] $'
-    };
+    return getREPLstate();
   },
 
   // Reads a command that was just submitted and passes it to EVALUATE
@@ -45,10 +47,7 @@ var REPL = React.createClass({
       } else {
         this.PRINT('sudo: incorrect password');
       }
-      let newState = this.state;
-      newState.sudo = undefined;
-      newState.whoami = '[tal@ater ~] $';
-      this.setState(newState);
+      REPLActions.clearSudo();
       this.LOOP();
       return;
     }
@@ -68,9 +67,7 @@ var REPL = React.createClass({
 
   // Prints output from a command
   PRINT: function(output) {
-    let newState = this.state;
-    newState.outputBuffer.push({key: newState.outputBuffer.length+1, text: output});
-    this.setState(newState);
+    REPLActions.addToOutputBuffer(output);
   },
 
   // Clears and focuses input again
@@ -90,7 +87,16 @@ var REPL = React.createClass({
     }
   },
 
-  componentDidMount: focusOnInput,
+  componentDidMount: function() {
+    focusOnInput();
+    OutputBufferStore.addChangeListener(this._onChange);
+    AppStateStore.addChangeListener(this._onChange);
+  },
+
+  componentWillUnmount: function() {
+    OutputBufferStore.removeChangeListener(this._onChange);
+    AppStateStore.removeChangeListener(this._onChange);
+  },
 
   render: function() {
     var outputLines = this.state.outputBuffer.map(
@@ -109,6 +115,10 @@ var REPL = React.createClass({
         </div>
       </div>
     );
+  },
+
+  _onChange: function() {
+    this.setState(getREPLstate());
   }
 
 });
