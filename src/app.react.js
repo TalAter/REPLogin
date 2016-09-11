@@ -1,3 +1,5 @@
+var REPLcommands = require('./repl.commands.react.js');
+
 /*************************/
 /* REPL's Little Helpers */
 /*************************/
@@ -6,13 +8,6 @@
 var focusOnInput = () => {
   document.getElementById('repl-text-input').focus();
 };
-
-
-/*****************/
-/* REPL commands */
-/*****************/
-
-var REPLcommands = require('./repl.commands.react.js');
 
 
 /********************/
