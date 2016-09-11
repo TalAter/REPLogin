@@ -17,15 +17,18 @@ module.exports = function(grunt) {
         jshintrc: true
       }
     },
-    babel: {
-      options: {
-        sourceMap: true,
-        plugins: ['transform-react-jsx'],
-        presets: ['es2015', 'react']
+    browserify: {
+      standalone: {
+        src: ['src/app.react.js'],
+        dest: 'public/js/app.js'
       },
-      dist: {
-        files: {
-          'public/js/app.js': 'src/app.react.js'
+      options: {
+        transform: [
+          [ "babelify", {presets: ["es2015", "react"]} ]
+        ],
+        browserifyOptions: {
+          standalone: 'REPLogin',
+          debug: true
         }
       }
     },
@@ -47,6 +50,6 @@ module.exports = function(grunt) {
   });
 
   // Register task(s).
-  grunt.registerTask('default', ['jshint', 'babel']);
+  grunt.registerTask('default', ['jshint', 'browserify']);
   grunt.registerTask('serve', ['default', 'express', 'watch']);
 };
