@@ -18,6 +18,18 @@ module.exports = function(grunt) {
         jshintrc: true
       }
     },
+    babel: {
+      options: {
+        sourceMap: true,
+        plugins: ['transform-react-jsx'],
+        presets: ['es2015', 'react']
+      },
+      dist: {
+        files: {
+          'public/js/app.js': 'src/app.react.js'
+        }
+      }
+    },
     watch: {
       files: ['public/**/*', 'server/**/*', '!**/node_modules/**'],
       tasks: ['default', 'express'],
@@ -36,6 +48,6 @@ module.exports = function(grunt) {
   });
 
   // Register task(s).
-  grunt.registerTask('default', ['jshint']);
+  grunt.registerTask('default', ['jshint', 'babel']);
   grunt.registerTask('serve', ['default', 'express', 'watch']);
 };
