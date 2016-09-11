@@ -12,7 +12,7 @@
 - [ ] Install dependencies: `$ npm install`
 - [ ] Run REPLogin's server: `$ npm start`
 - [ ] Point your browser to `http://localhost:8765/`
-- [ ] Play around with some commands **(the password is: `12345`)**
+- [ ] Play around with some commands **(the password for sudo is: `12345`)**
 
 
 ### Some commands to try
@@ -20,7 +20,7 @@
 - `help` - Shows a list of available commands
 - `ls` - List directory contents
 - `cat passwords` - Attempt to display the contents of the _passwords_ file
-- **`sudo cat passwords` - Login as a super user and display contents of _passwords_ file (passwords is: `12345`)**
+- **`sudo cat passwords` - Login as a super user and display contents of _passwords_ file (the password for sudo is: `12345`)**
  
 ### tl;dr;
 
