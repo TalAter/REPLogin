@@ -7,6 +7,12 @@ var REPLActions = {
       output: output
     });
   },
+  addToCommandHistory: function(input) {
+    AppDispatcher.dispatch({
+      actionType: 'add-to-command-history',
+      input: input
+    });
+  },
   setSudo: function(command, args) {
     AppDispatcher.dispatch({
       actionType: 'set-sudo',

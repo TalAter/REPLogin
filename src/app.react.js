@@ -1,6 +1,7 @@
 var REPLcommands = require('./repl.commands.react.js');
 var OutputBufferStore = require('./stores/OutputBufferStore.js');
 var AppStateStore = require('./stores/AppStateStore.js');
+require('./stores/CommandHistoryStore.js');
 var REPLActions =  require('./actions/REPLActions.js');
 
 /*************************/
@@ -34,6 +35,9 @@ var REPL = React.createClass({
   READ: function(event) {
     event.preventDefault();
     var input = document.getElementById('repl-text-input').value.toLowerCase();
+    if (!this.state.sudo) {
+      REPLActions.addToCommandHistory(input);
+    }
     this.EVALUATE(input);
   },
 
