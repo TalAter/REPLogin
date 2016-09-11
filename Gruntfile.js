@@ -8,8 +8,7 @@ module.exports = function(grunt) {
     pkg: grunt.file.readJSON('package.json'),
     jshint: {
       all: [
-        'public/*.js',
-        'public/js/*.js',
+        'src/*.js',
         'server/*.js',
         'Gruntfile.js',
         'package.json'
@@ -31,7 +30,7 @@ module.exports = function(grunt) {
       }
     },
     watch: {
-      files: ['public/**/*', 'server/**/*', '!**/node_modules/**'],
+      files: ['src/*.js', 'public/**/*', 'server/**/*', '!**/node_modules/**'],
       tasks: ['default', 'express'],
       options: {
         spawn: false
