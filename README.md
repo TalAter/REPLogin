@@ -1,4 +1,6 @@
 # REPLogin
+
+[![Greenkeeper badge](https://badges.greenkeeper.io/TalAter/REPLogin.svg)](https://greenkeeper.io/)
 <img align="right" src="public/repl-in-action.jpg" alt="REPLing across devices">
 ### A REPL written with React demonstrating user login
 
